@@ -1,109 +1,78 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import { Crown, Mail, Lock } from "lucide-react";
 
-"use client"
-import React, { useEffect, useState } from 'react'
-import {
-    Crown,
-    Mail,
-    Lock
-} from 'lucide-react'
-
-import { gold } from '../color/color'
-import { useSelector } from 'react-redux'
-import { sw_server_error, sw_success, sw_warning } from '../sweet-alert/Swals'
-import { post_api } from '../api_helper/api_helper'
-import { useRouter } from 'next/navigation'
-import Loading from '../../../Loading'
+import { gold } from "../color/color";
+import { useSelector } from "react-redux";
+import { sw_server_error, sw_success, sw_warning } from "../sweet-alert/Swals";
+import { post_api } from "../api_helper/api_helper";
+import { useRouter } from "next/navigation";
+import Loading from "../../../Loading";
 
 export default function Form() {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [otpTab, setOtpTab] = useState(false);
 
-    const [loading, setLoading] = useState(false)
-    const router = useRouter()
-    const [otpTab, setOtpTab] = useState(false)
+  const [adminEmail, setAdminEmail] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
 
+  const token = useSelector((store) => store.adminAuth.token);
+  console.log(token);
 
-    const [adminEmail, setAdminEmail] = useState('')
-    const [adminPassword, setAdminPassword] = useState('')
+  useEffect(() => {
+    if (otpTab) {
+      router.push("/verify-otp");
+    }
+  }, [otpTab]);
 
-    const token = useSelector((store) => store.adminAuth.token)
-    console.log(token)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    useEffect(() => {
-        if (otpTab) {
-            router.push('/verify-otp')
-        }
-    }, [otpTab])
+    setLoading(true);
 
-
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        setLoading(true);
-
-        const userDataObj = {
-            admin_email: adminEmail,
-            admin_password: adminPassword
-        };
-
-        try {
-
-            const response = await post_api({
-                body: userDataObj,
-                params: null,
-                path: 'admin/login'
-            });
-
-            if (response.data.success) {
-
-                localStorage.setItem(
-                    "admin_id",
-                    response.data.admin_id
-                );
-
-                setOtpTab(true);
-
-                sw_success(
-                    "Otp Sent To Your Email",
-                    "Check your mail to verify"
-                );
-
-            } else {
-
-                sw_warning(
-                    "Warning",
-                    "Email and Password are Invalid"
-                );
-
-            }
-
-        } catch (error) {
-
-            sw_server_error(
-                "Server Error",
-                "Something went wrong"
-            );
-
-            console.log(error);
-
-        } finally {
-
-            setLoading(false);
-
-        }
+    const userDataObj = {
+      admin_email: adminEmail,
+      admin_password: adminPassword,
     };
 
-    return (
-        <>
-        {loading && <Loading/> }
-            <section
-                className="
+    try {
+      const response = await post_api({
+        body: userDataObj,
+        params: null,
+        path: "admin/login",
+      });
+
+      if (response.data.success) {
+        localStorage.setItem("admin_id", response.data.admin_id);
+
+        setOtpTab(true);
+
+        sw_success("Otp Sent To Your Email", "Check your mail to verify");
+      } else {
+        sw_warning("Warning", "Email and Password are Invalid");
+      }
+    } catch (error) {
+      sw_server_error("Server Error", "Something went wrong");
+
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      {loading && <Loading />}
+      <section
+        className="
                 w-full
-                min-h-screen
-                px-4
-                py-5
+                px-0
+                py-0
                 sm:px-6
+                sm:py-6
                 lg:px-10
+                lg:py-10
                 flex
                 items-center
                 justify-center
@@ -111,11 +80,10 @@ export default function Form() {
                 relative
                 bg-black
             "
-            >
-
-                {/* GOLD GLOW */}
-                <div
-                    className="
+      >
+        {/* GOLD GLOW */}
+        <div
+          className="
                     absolute
                     top-[-120]
                     left-[-120]
@@ -125,11 +93,11 @@ export default function Form() {
                     blur-3xl
                     opacity-20
                 "
-                    style={{ background: gold.base }}
-                />
+          style={{ background: gold.base }}
+        />
 
-                <div
-                    className="
+        <div
+          className="
                     absolute
                     bottom-[-120]
                     right-[-120]
@@ -139,12 +107,12 @@ export default function Form() {
                     blur-3xl
                     opacity-20
                 "
-                    style={{ background: gold.base }}
-                />
+          style={{ background: gold.base }}
+        />
 
-                {/* MAIN CARD */}
-                <div
-                    className="
+        {/* MAIN CARD */}
+        <div
+          className="
                     relative
                     w-full
                     max-w-330
@@ -153,16 +121,14 @@ export default function Form() {
                     bg-[#0f0f0f]
                     border
                     border-[#2b2b2b]
-                    rounded-[25]
-                    lg:rounded-[40]
+                    rounded-
                     overflow-hidden
                     shadow-[0_25px_80px_rgba(0,0,0,0.75)]
                 "
-                >
-
-                    {/* LEFT SIDE */}
-                    <div
-                        className="
+        >
+          {/* LEFT SIDE */}
+          <div
+            className="
                         hidden
                         lg:flex
                         flex-col
@@ -175,11 +141,10 @@ export default function Form() {
                         border-r
                         border-[#242424]
                     "
-                    >
-
-                        {/* GOLD OVERLAY */}
-                        <div
-                            className="
+          >
+            {/* GOLD OVERLAY */}
+            <div
+              className="
                             absolute
                             top-[-100]
                             right-[-100]
@@ -189,17 +154,16 @@ export default function Form() {
                             blur-3xl
                             opacity-20
                         "
-                            style={{ background: gold.base }}
-                        />
+              style={{ background: gold.base }}
+            />
 
-                        {/* TOP */}
-                        <div className="relative z-10">
-
-                            {/* LOGO */}
-                            <div
-                                className="
-                                w-[90]
-                                h-[90]
+            {/* TOP */}
+            <div className="relative z-10">
+              {/* LOGO */}
+              <div
+                className="
+                                w-[70]
+                                h-[70]
                                 rounded-full
                                 flex
                                 items-center
@@ -207,17 +171,17 @@ export default function Form() {
                                 border
                                 shadow-[0_10px_40px_rgba(0,0,0,0.5)]
                             "
-                                style={{
-                                    borderColor: gold.base,
-                                    background: `linear-gradient(to bottom right, ${'#E6C766'}, ${'black'})`
-                                }}
-                            >
-                                <Crown size={34} className="text-white" />
-                            </div>
+                style={{
+                  borderColor: gold.base,
+                  background: `linear-linear(to bottom right, ${"#E6C766"}, ${"black"})`,
+                }}
+              >
+                <Crown size={34} className="text-white" />
+              </div>
 
-                            {/* TITLE */}
-                            <h1
-                                className="
+              {/* TITLE */}
+              <h1
+                className="
                                 text-5xl
                                 xl:text-6xl
                                 font-black
@@ -225,33 +189,31 @@ export default function Form() {
                                 mt-10
                                 uppercase
                             "
-                                style={{ color: gold.base }}
-                            >
-                                Kritika
-                                <br />
-                                Fashion Point
-                            </h1>
+                style={{ color: gold.base }}
+              >
+                Kritika
+                <br />
+                Fashion Point
+              </h1>
 
-                            {/* DESCRIPTION */}
-                            <p
-                                className="
+              {/* DESCRIPTION */}
+              <p
+                className="
                                 mt-8
                                 text-gray-400
                                 leading-8
                                 text-lg
                                 max-w-[550]
                             "
-                            >
-                                Premium jewellery management dashboard crafted
-                                with luxury black and golden aesthetics for an
-                                elegant modern admin experience.
-                            </p>
+              >
+                Premium jewellery management dashboard crafted with luxury black
+                and golden aesthetics for an elegant modern admin experience.
+              </p>
+            </div>
 
-                        </div>
-
-                        {/* BOTTOM CARD */}
-                        <div
-                            className="
+            {/* BOTTOM CARD */}
+            <div
+              className="
                             relative
                             z-10
                             mt-14
@@ -261,47 +223,44 @@ export default function Form() {
                             p-8
                             shadow-[0_15px_40px_rgba(0,0,0,0.5)]
                         "
-                            style={{
-                                borderColor: '#2d2d2d'
-                            }}
-                        >
-
-                            <p
-                                className="
+              style={{
+                borderColor: "#2d2d2d",
+              }}
+            >
+              <p
+                className="
                                 uppercase
                                 tracking-[4]
                                 text-sm
                                 font-bold
                             "
-                                style={{ color: gold.base }}
-                            >
-                                Luxury Admin Panel
-                            </p>
+                style={{ color: gold.base }}
+              >
+                Luxury Admin Panel
+              </p>
 
-                            <h2
-                                className="
+              <h2
+                className="
                                 text-3xl
                                 font-black
                                 mt-4
                                 leading-tight
                             "
-                                style={{ color: '#fff' }}
-                            >
-                                Elegant Royal Dashboard Experience
-                            </h2>
+                style={{ color: "#fff" }}
+              >
+                Elegant Royal Dashboard Experience
+              </h2>
 
-                            <p className="text-gray-500 mt-5 leading-8">
-                                Manage jewellery collections, premium orders,
-                                customers and inventory with a refined luxury UI.
-                            </p>
+              <p className="text-gray-500 mt-5 leading-8">
+                Manage jewellery collections, premium orders, customers and
+                inventory with a refined luxury UI.
+              </p>
+            </div>
+          </div>
 
-                        </div>
-
-                    </div>
-
-                    {/* RIGHT SIDE */}
-                    <div
-                        className="
+          {/* RIGHT SIDE */}
+          <div
+            className="
                         flex
                         items-center
                         justify-center
@@ -311,30 +270,25 @@ export default function Form() {
                         xl:p-16
                         bg-[#070707]
                     "
-                    >
-
-                        {/* FORM BOX */}
-                        <div
-                            className="
+          >
+            {/* FORM BOX */}
+            <div
+              className="
                             w-full
                             max-w-[520]
                             bg-[#111111]
                             border
                             border-[#2a2a2a]
-                            rounded-[25]
-                            sm:rounded-[35]
                             p-6
                             sm:p-8
                             lg:p-10
                             shadow-[0_20px_60px_rgba(0,0,0,0.65)]
                         "
-                        >
-
-                            {/* MOBILE LOGO */}
-                            <div className="lg:hidden flex justify-center mb-8">
-
-                                <div
-                                    className="
+            >
+              {/* MOBILE LOGO */}
+              <div className="lg:hidden flex justify-center mb-8">
+                <div
+                  className="
                                     w-[75]
                                     h-[75]
                                     rounded-full
@@ -343,66 +297,61 @@ export default function Form() {
                                     justify-center
                                     border
                                 "
-                                    style={{
-                                        borderColor: gold.base,
-                                        background: `linear-gradient(to bottom right, ${'#E6C766'}, ${'black'})`
-                                    }}
-                                >
-                                    <Crown size={28} className="text-white" />
-                                </div>
+                  style={{
+                    borderColor: gold.base,
+                    background: `linear-linear(to bottom right, ${"#E6C766"}, ${"black"})`,
+                  }}
+                >
+                  <Crown size={28} className="text-white" />
+                </div>
+              </div>
 
-                            </div>
-
-                            {/* HEADING */}
-                            <div className="text-center">
-
-                                <h2
-                                    className="
+              {/* HEADING */}
+              <div className="text-center">
+                <h2
+                  className="
                                     text-3xl
                                     sm:text-4xl
                                     font-black
                                     uppercase
                                     tracking-[3]
                                 "
-                                    style={{ color: gold.base }}
-                                >
-                                    Admin Login
-                                </h2>
+                  style={{ color: gold.base }}
+                >
+                  Admin Login
+                </h2>
 
-                                <p
-                                    className="
+                <p
+                  className="
                                     text-gray-500
                                     mt-4
                                     leading-7
                                     text-sm
                                     sm:text-base
                                 "
-                                >
-                                    Login to access Kritika Fashion Point dashboard
-                                </p>
+                >
+                  Login to access Kritika Fashion Point dashboard
+                </p>
+              </div>
 
-                            </div>
-
-                            <form onSubmit={handleSubmit} >
-
-                                {/* EMAIL */}
-                                <div className="mt-10">
-
-                                    <label
-                                        className="
+              <form onSubmit={handleSubmit}>
+                {/* EMAIL */}
+                <div className="mt-10">
+                  <label
+                    className="
                                     text-xs
                                     sm:text-sm
                                     uppercase
                                     tracking-[2]
                                     font-bold
                                 "
-                                        style={{ color: gold.base }}
-                                    >
-                                        Email Address
-                                    </label>
+                    style={{ color: gold.base }}
+                  >
+                    Email Address
+                  </label>
 
-                                    <div
-                                        className="
+                  <div
+                    className="
                                     mt-3
                                     flex
                                     items-center
@@ -417,18 +366,14 @@ export default function Form() {
                                     focus-within:border-[#c9a227]
                                     duration-300
                                 "
-                                    >
+                  >
+                    <Mail size={20} style={{ color: gold.base }} />
 
-                                        <Mail
-                                            size={20}
-                                            style={{ color: gold.base }}
-                                        />
-
-                                        <input
-                                            onChange={(e) => setAdminEmail(e.target.value)}
-                                            type="email"
-                                            placeholder="Enter your email"
-                                            className="
+                    <input
+                      onChange={(e) => setAdminEmail(e.target.value)}
+                      type="email"
+                      placeholder="Enter your email"
+                      className="
                                         w-full
                                         bg-transparent
                                         outline-none
@@ -437,30 +382,27 @@ export default function Form() {
                                         text-sm
                                         sm:text-base
                                     "
-                                        />
+                    />
+                  </div>
+                </div>
 
-                                    </div>
-
-                                </div>
-
-                                {/* PASSWORD */}
-                                <div className="mt-6">
-
-                                    <label
-                                        className="
+                {/* PASSWORD */}
+                <div className="mt-6">
+                  <label
+                    className="
                                     text-xs
                                     sm:text-sm
                                     uppercase
                                     tracking-[2]
                                     font-bold
                                 "
-                                        style={{ color: gold.base }}
-                                    >
-                                        Password
-                                    </label>
+                    style={{ color: gold.base }}
+                  >
+                    Password
+                  </label>
 
-                                    <div
-                                        className="
+                  <div
+                    className="
                                     mt-3
                                     flex
                                     items-center
@@ -475,18 +417,14 @@ export default function Form() {
                                     focus-within:border-[#c9a227]
                                     duration-300
                                 "
-                                    >
+                  >
+                    <Lock size={20} style={{ color: gold.base }} />
 
-                                        <Lock
-                                            size={20}
-                                            style={{ color: gold.base }}
-                                        />
-
-                                        <input
-                                            onChange={(e) => setAdminPassword(e.target.value)}
-                                            type="password"
-                                            placeholder="Enter your password"
-                                            className="
+                    <input
+                      onChange={(e) => setAdminPassword(e.target.value)}
+                      type="password"
+                      placeholder="Enter your password"
+                      className="
                                         w-full
                                         bg-transparent
                                         outline-none
@@ -495,32 +433,30 @@ export default function Form() {
                                         text-sm
                                         sm:text-base
                                     "
-                                        />
+                    />
+                  </div>
+                </div>
 
-                                    </div>
-
-                                </div>
-
-                                {/* FORGOT */}
-                                <div className="mt-4 flex justify-end">
-                                    <button
-                                        type='button'
-                                        className="
+                {/* FORGOT */}
+                <div className="mt-4 flex justify-end">
+                  <button
+                    type="button"
+                    className="
                                     text-sm
                                     hover:opacity-80
                                     duration-300
                                     cursor-pointer
                                 "
-                                        style={{ color: gold.base }}
-                                    >
-                                        Forgot Password?
-                                    </button>
-                                </div>
+                    style={{ color: gold.base }}
+                  >
+                    Forgot Password?
+                  </button>
+                </div>
 
-                                {/* BUTTON */}
-                                <button
-                                    type='submit'
-                                    className="
+                {/* BUTTON */}
+                <button
+                  type="submit"
+                  className="
                                 relative
                                 w-full
                                 overflow-hidden
@@ -535,16 +471,14 @@ export default function Form() {
                                 duration-300
                                 cursor-pointer
                             "
-                                    style={{
-                                        background: `linear-gradient(to right, ${gold.base}, ${gold.dark})`
-                                    }}
-                                >
-
-                                    Send OTP
-
-                                    {/* SHINE */}
-                                    <div
-                                        className="
+                  style={{
+                    background: `linear-linear(to right, ${gold.base}, ${gold.dark})`,
+                  }}
+                >
+                  Send OTP
+                  {/* SHINE */}
+                  <div
+                    className="
                                     absolute
                                     top-0
                                     left-[-120%]
@@ -555,14 +489,13 @@ export default function Form() {
                                     hover:left-[120%]
                                     duration-1000
                                 "
-                                    />
+                  />
+                </button>
+              </form>
 
-                                </button>
-                            </form>
-
-                            {/* FOOTER */}
-                            <p
-                                className="
+              {/* FOOTER */}
+              <p
+                className="
                                 text-center
                                 text-xs
                                 sm:text-sm
@@ -570,18 +503,13 @@ export default function Form() {
                                 tracking-[1]
                                 text-gray-600
                             "
-                            >
-                                Premium Royal Admin Experience
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-        </>
-
-    )
+              >
+                Premium Royal Admin Experience
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

@@ -65,7 +65,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50">
+    <header className="sticky top-0 z-999 w-full">
       {menuOpen && (
         <div className="w-full h-full fixed top-0 left-0 bg-[rgba(0,0,0,0.9)] -z-10"></div>
       )}
@@ -79,7 +79,7 @@ export default function Header() {
       shadow-[0_8px_30px_rgba(0,0,0,0.45)]
     "
       >
-        <div className="max-w-[1320px] mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-[1420] mx-auto px-4 py-4 flex items-center justify-between">
           {/* Logo */}
           <h1
             className="

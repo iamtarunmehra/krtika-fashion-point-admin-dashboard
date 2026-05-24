@@ -42,4 +42,30 @@ export const HeaderData = [
     slug: "/enquiries",
     icon: <MdContactEmergency />,
   },
+   {
+    title: "enquiries",
+    slug: "/enquiries",
+    icon: <MdContactEmergency />,
+  },
+   {
+    title: "enquiries",
+    slug: "/enquiries",
+    icon: <MdContactEmergency />,
+  },
+   {
+    title: "enquiries",
+    slug: "/enquiries",
+    icon: <MdContactEmergency />,
+  },
+   {
+    title: "enquiries",
+    slug: "/enquiries",
+    icon: <MdContactEmergency />,
+  },
+   {
+    title: "enquiries",
+    slug: "/enquiries",
+    icon: <MdContactEmergency />,
+  },
+  
 ];
