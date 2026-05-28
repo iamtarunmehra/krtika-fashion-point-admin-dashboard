@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Crown, Mail, Lock } from "lucide-react";
 
-import { gold } from "../color/color";
 import { useSelector } from "react-redux";
 import { sw_server_error, sw_success, sw_warning } from "../sweet-alert/Swals";
 import { post_api } from "../api_helper/api_helper";
 import { useRouter } from "next/navigation";
 import Loading from "../../../Loading";
+import { gold } from "../color/color";
+import Link from "next/link";
 
 export default function Form() {
   const [loading, setLoading] = useState(false);
@@ -40,7 +41,7 @@ export default function Form() {
       const response = await post_api({
         body: userDataObj,
         params: null,
-        path: "admin/login",
+        path: "admin/auth/login",
       });
 
       if (response.data.success) {
@@ -81,39 +82,11 @@ export default function Form() {
                 bg-black
             "
       >
-        {/* GOLD GLOW */}
-        <div
-          className="
-                    absolute
-                    top-[-120]
-                    left-[-120]
-                    w-[300]
-                    h-[300]
-                    rounded-full
-                    blur-3xl
-                    opacity-20
-                "
-          style={{ background: gold.base }}
-        />
-
-        <div
-          className="
-                    absolute
-                    bottom-[-120]
-                    right-[-120]
-                    w-[320]
-                    h-[320]
-                    rounded-full
-                    blur-3xl
-                    opacity-20
-                "
-          style={{ background: gold.base }}
-        />
-
         {/* MAIN CARD */}
         <div
           className="
                     relative
+                    rounded-2xl
                     w-full
                     max-w-330
                     grid
@@ -142,21 +115,6 @@ export default function Form() {
                         border-[#242424]
                     "
           >
-            {/* GOLD OVERLAY */}
-            <div
-              className="
-                            absolute
-                            top-[-100]
-                            right-[-100]
-                            w-[250]
-                            h-[250]
-                            rounded-full
-                            blur-3xl
-                            opacity-20
-                        "
-              style={{ background: gold.base }}
-            />
-
             {/* TOP */}
             <div className="relative z-10">
               {/* LOGO */}
@@ -173,7 +131,7 @@ export default function Form() {
                             "
                 style={{
                   borderColor: gold.base,
-                  background: `linear-linear(to bottom right, ${"#E6C766"}, ${"black"})`,
+                  background: `linear-gradient(to bottom right, ${"#E6C766"}, ${"black"})`,
                 }}
               >
                 <Crown size={34} className="text-white" />
@@ -275,6 +233,7 @@ export default function Form() {
             <div
               className="
                             w-full
+                            rounded-3xl
                             max-w-[520]
                             bg-[#111111]
                             border
@@ -299,7 +258,7 @@ export default function Form() {
                                 "
                   style={{
                     borderColor: gold.base,
-                    background: `linear-linear(to bottom right, ${"#E6C766"}, ${"black"})`,
+                    background: `linear-gradient(to bottom right, ${"#E6C766"}, ${"black"})`,
                   }}
                 >
                   <Crown size={28} className="text-white" />
@@ -374,13 +333,14 @@ export default function Form() {
                       type="email"
                       placeholder="Enter your email"
                       className="
+                                        text-lg
+                                        tracking-widest
                                         w-full
                                         bg-transparent
                                         outline-none
                                         text-white
                                         placeholder:text-gray-600
-                                        text-sm
-                                        sm:text-base
+                                        
                                     "
                     />
                   </div>
@@ -425,13 +385,13 @@ export default function Form() {
                       type="password"
                       placeholder="Enter your password"
                       className="
+                                          text-lg
+                                        tracking-widest
                                         w-full
                                         bg-transparent
                                         outline-none
                                         text-white
                                         placeholder:text-gray-600
-                                        text-sm
-                                        sm:text-base
                                     "
                     />
                   </div>
@@ -439,18 +399,19 @@ export default function Form() {
 
                 {/* FORGOT */}
                 <div className="mt-4 flex justify-end">
-                  <button
-                    type="button"
-                    className="
-                                    text-sm
-                                    hover:opacity-80
+                  <Link href={"/forgot-password"}>
+                    <button
+                      type="button"
+                      className="
+                                    hover:text-amber-400
                                     duration-300
                                     cursor-pointer
+                                    text-amber-300 text-md hover:scale-105  rounded px-5 py-1
                                 "
-                    style={{ color: gold.base }}
-                  >
-                    Forgot Password?
-                  </button>
+                    >
+                      Forgot Password?
+                    </button>
+                  </Link>
                 </div>
 
                 {/* BUTTON */}
@@ -472,7 +433,7 @@ export default function Form() {
                                 cursor-pointer
                             "
                   style={{
-                    background: `linear-linear(to right, ${gold.base}, ${gold.dark})`,
+                    background: `linear-gradient(to right, ${gold.base}, ${gold.dark})`,
                   }}
                 >
                   Send OTP

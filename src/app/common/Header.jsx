@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { HeaderData } from "../api_data/Headermenu";
 import { FaUser } from "react-icons/fa";
 import { gold } from "../color/color";
+import { adminLogout } from "../redux/slices/adminAuthSlice";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,11 +27,11 @@ export default function Header() {
     { name: "enquiries", link: "enquiries" },
   ];
 
-  useEffect(() => {
-    if (!token && path !== "/verify-otp" && path !== "/forgot-password") {
-      router.push("/");
-    }
-  }, [token, path]);
+  // useEffect(() => {
+  //   if (!token && path !== "/verify-otp" && path !== "/forgot-password") {
+  //     router.push("/");
+  //   }
+  // }, [token, path]);
 
   const dispatch = useDispatch();
 
@@ -40,25 +41,57 @@ export default function Header() {
         title: "Are you sure?",
         text: "You will be logged out!",
         icon: "warning",
+
+        background: "#0a0a0a",
+        color: "#d4af37",
+
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+
         confirmButtonText: "Yes, Logout",
         cancelButtonText: "Cancel",
+
+        confirmButtonColor: "#d4af37",
+        cancelButtonColor: "#1f1f1f",
+
+        customClass: {
+          popup: "rounded-3xl border border-yellow-700 shadow-2xl",
+          title: "text-yellow-500 font-bold",
+          htmlContainer: "text-yellow-200",
+          confirmButton:
+            "font-bold text-black px-6 py-2 rounded-xl",
+          cancelButton:
+            "font-bold text-yellow-500 border border-yellow-700 px-6 py-2 rounded-xl",
+        },
+
       }).then((result) => {
+
         if (result.isConfirmed) {
+
           dispatch(adminLogout());
+
           localStorage.removeItem("admin_id");
 
           Swal.fire({
             title: "Logged Out!",
             text: "You have been logged out successfully.",
             icon: "success",
+
+            background: "#0a0a0a",
+            color: "#d4af37",
+
             timer: 1500,
             showConfirmButton: false,
+
+            customClass: {
+              popup:
+                "rounded-3xl border border-yellow-700 shadow-2xl",
+              title: "text-yellow-500 font-bold",
+              htmlContainer: "text-yellow-200",
+            },
           });
         }
       });
+
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +100,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-999 w-full">
       {menuOpen && (
-        <div className="w-full h-full fixed top-0 left-0 bg-[rgba(0,0,0,0.9)] -z-10"></div>
+        <div onClick={() => setMenuOpen(false)} className="w-full h-full fixed top-0 left-0 bg-[rgba(0,0,0,0.9)] -z-10"></div>
       )}
       {/* Top Header */}
       <div
@@ -81,8 +114,11 @@ export default function Header() {
       >
         <div className="max-w-[1420] mx-auto px-4 py-4 flex items-center justify-between">
           {/* Logo */}
-          <h1
-            className="
+          {/* for pc */}
+          <div className="lg:block hidden">
+            <h1
+              className="
+            
           lg:text-2xl
           text-2xl
           font-black
@@ -90,13 +126,13 @@ export default function Header() {
           cursor-pointer
           flex items-center gap-2
         "
-          >
-            <span className="text-white flex items-center gap-3">
-              <FaUser style={{ color: gold.mid }} size={20} /> Admin
-            </span>
+            >
+              <span className="text-white flex items-center gap-3">
+                <FaUser style={{ color: gold.mid }} size={20} /> Admin
+              </span>
 
-            <span
-              className="
+              <span
+                className="
             bg-linear-to-r
             from-[#f5d36b]
             via-[#d4af37]
@@ -104,10 +140,45 @@ export default function Header() {
             bg-clip-text
             text-transparent
           "
+              >
+                Dashboard
+              </span>
+            </h1>
+          </div>
+
+
+          {/* Logo */}
+          {/* for mobile and small devices */}
+          <div className="lg:hidden block">
+            <h1
+              className="
+          lg:text-2xl
+          text-2xl
+          font-black
+          tracking-[2px]
+          cursor-pointer
+          flex items-center gap-2
+        "
             >
-              Dashboard
-            </span>
-          </h1>
+              <span className="text-white flex items-center gap-3">
+                <FaUser style={{ color: gold.mid }} size={20} />
+              </span>
+
+              <span
+                className="
+            bg-linear-to-r
+            from-[#f5d36b]
+            via-[#d4af37]
+            to-[#8b6a16]
+            bg-clip-text
+            text-transparent
+          "
+              >
+                Dashboard
+              </span>
+            </h1>
+          </div>
+
 
           {/* Profile */}
           <div
@@ -142,27 +213,27 @@ export default function Header() {
                 <p
                   className="
                 text-white
-                font-semibold
+                font-extrabold
                 sm:block hidden
-                text-lg
+                text-xl
                 cursor-pointer
                 hover:text-[#f5d36b]
                 duration-300
                 tracking-[3]
                 uppercase
+
               "
                 >
-                  <p>KFP</p>
+                  <span>KFP</span>
                 </p>
 
                 {/* Dropdown */}
                 <div
                   className={`
-                ${
-                  menuOpen
-                    ? "opacity-100 visible translate-y-0"
-                    : "opacity-0 invisible -translate-y-3"
-                }
+                ${menuOpen
+                      ? "opacity-100 visible translate-y-0"
+                      : "opacity-0 invisible -translate-y-3"
+                    }
 
                 absolute
                 top-[65]

@@ -65,10 +65,8 @@ export default function Page() {
     return (
         <section
             className="
-        w-screen
+        w-full
         lg:w-full
-        min-h-screen
-        overflow-y-auto
         overflow-x-hidden
         scroll-smooth
         custom-scrollbar

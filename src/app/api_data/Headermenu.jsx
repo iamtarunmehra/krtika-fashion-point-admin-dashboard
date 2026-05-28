@@ -18,54 +18,13 @@ export const HeaderData = [
     icon: <MdMore />,
   },
   {
-    title: "doctors",
-    slug: "/doctors",
-    icon: <FaUserDoctor />,
-  },
-  {
-    title: "services",
-    slug: "/services",
-    icon: <MdHomeRepairService />,
-  },
-  {
-    title: "blogs",
-    slug: "/blogs",
+    title: "Category",
+    slug: "/category  ",
     icon: <FaMicroblog />,
   },
-  {
-    title: "appointments",
-    slug: "/appointments",
-    icon: <FaClock />,
-  },
-  {
-    title: "enquiries",
-    slug: "/enquiries",
-    icon: <MdContactEmergency />,
-  },
    {
-    title: "enquiries",
-    slug: "/enquiries",
-    icon: <MdContactEmergency />,
+    title: "Product",
+    slug: "/product  ",
+    icon: <FaMicroblog />,
   },
-   {
-    title: "enquiries",
-    slug: "/enquiries",
-    icon: <MdContactEmergency />,
-  },
-   {
-    title: "enquiries",
-    slug: "/enquiries",
-    icon: <MdContactEmergency />,
-  },
-   {
-    title: "enquiries",
-    slug: "/enquiries",
-    icon: <MdContactEmergency />,
-  },
-   {
-    title: "enquiries",
-    slug: "/enquiries",
-    icon: <MdContactEmergency />,
-  },
-  
 ];

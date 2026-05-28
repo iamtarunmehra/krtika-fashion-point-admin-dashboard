@@ -5,6 +5,7 @@ import { setAdminLogin } from '../redux/slices/adminAuthSlice'
 import { useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
+import Loading from '../../../Loading'
 
 export default function VerifyOtp() {
 
@@ -58,7 +59,7 @@ export default function VerifyOtp() {
             const admin_id = localStorage.getItem("admin_id")
 
             const response = await post_api({
-                path: "admin/verify-otp",
+                path: "admin/auth/verify-otp",
                 body: {
                     admin_id,
                     otp: otpValue
@@ -131,14 +132,18 @@ export default function VerifyOtp() {
         }
     }
 
+    const [loading, setLoading] = useState(false)
+
     const resendOtp = async () => {
 
         const admin_id = localStorage.getItem("admin_id")
         setTimer(60)
         try {
 
+            setLoading(true)
+
             const response = await post_api({
-                path: "admin/resend-otp",
+                path: "admin/auth/resend-otp",
                 body: { admin_id }
             })
 
@@ -159,78 +164,84 @@ export default function VerifyOtp() {
                 icon: "error",
                 title: "Server Error"
             })
-
+        }
+        finally {
+            setLoading(false)
         }
     }
 
     return (
-        <div className='h-screen w-screen overflow-hidden  bg-black'>
 
+        <>
+            {loading && <Loading />}
 
-            <div className='flex items-center justify-center h-full'>
+            <div className='h-screen w-screen overflow-hidden  bg-black'>
 
-                <div className='bg-black m-5 py-10 px-4 backdrop-blur-md border border-[gold] rounded-xl shadow-2xl text-center w-[380]'>
+                <div className='flex items-center justify-center h-full'>
 
-                    {/* Heading */}
-                    <h2 className='text-3xl font-bold mb-2 bg-linear-to-r from-amber-300 to-amber-800 bg-clip-text text-transparent'>
-                        Verify OTP
-                    </h2>
+                    <div className='bg-black m-5 py-10 px-4 backdrop-blur-md border border-amber-500 rounded-xl shadow-2xl text-center w-[380]'>
 
-                    <p className='text-gray-300 text-sm mb-6'>
-                        Enter the 6 digit verification code sent to your email.
-                    </p>
+                        {/* Heading */}
+                        <h2 className='text-3xl font-bold mb-2 bg-linear-to-r from-amber-500 to-amber-800 bg-clip-text text-transparent'>
+                            Verify OTP
+                        </h2>
 
-                    {/* OTP Inputs */}
-                    <form className='flex gap-3 justify-center mb-6'>
+                        <p className='text-gray-300 text-sm mb-6'>
+                            Enter the 6 digit verification code sent to your email.
+                        </p>
 
-                        {otp.map((digit, index) => (
+                        {/* OTP Inputs */}
+                        <form className='flex gap-3 justify-center mb-6'>
 
-                            <input
-                                key={index}
-                                type="text"
-                                maxLength="1"
-                                value={digit}
-                                ref={(el) => (inputs.current[index] = el)}
-                                onChange={(e) =>
-                                    handleChange(e.target.value, index)
-                                }
-                                onKeyDown={(e) => handleKeyDown(e, index)}
-                                className='lg:w-18 lg:h-18 md:w-16 md:h-16 w-12 h-12 text-center font-bold 
+                            {otp.map((digit, index) => (
+
+                                <input
+                                    key={index}
+                                    type="text"
+                                    maxLength="1"
+                                    value={digit}
+                                    ref={(el) => (inputs.current[index] = el)}
+                                    onChange={(e) =>
+                                        handleChange(e.target.value, index)
+                                    }
+                                    onKeyDown={(e) => handleKeyDown(e, index)}
+                                    className='lg:w-18 lg:h-18 md:w-16 md:h-16 w-12 h-12 text-center font-bold 
                             bg-black border border-amber-300/40 
                             text-white rounded-md 
                             focus:outline-none focus:border-amber-500
                             focus:shadow-lg focus:shadow-amber-500/30
                             transition duration-300 text-3xl'
-                            />
+                                />
 
-                        ))}
+                            ))}
 
-                    </form>
+                        </form>
 
-                    {/* Timer / Resend */}
-                    <div className='text-sm text-gray-400'>
+                        {/* Timer / Resend */}
+                        <div className='text-sm text-gray-400'>
 
-                        {timer > 0 ? (
-                            <p>
-                                Resend OTP in{" "}
-                                <span className='text-amber-400 font-semibold'>
-                                    {timer}s
-                                </span>
-                            </p>
-                        ) : (
-                            <button
-                                onClick={resendOtp}
-                                className='text-amber-400 cursor-pointer hover:text-amber-300 font-medium transition'
-                            >
-                                Resend OTP
-                            </button>
-                        )}
+                            {timer > 0 ? (
+                                <p>
+                                    Resend OTP in{" "}
+                                    <span className='text-amber-400 font-semibold'>
+                                        {timer}s
+                                    </span>
+                                </p>
+                            ) : (
+                                <button
+                                    onClick={resendOtp}
+                                    className='text-amber-400 cursor-pointer hover:text-amber-300 font-medium transition'
+                                >
+                                    Resend OTP
+                                </button>
+                            )}
+
+                        </div>
 
                     </div>
-
                 </div>
-            </div>
 
-        </div>
+            </div>
+        </>
     )
 }

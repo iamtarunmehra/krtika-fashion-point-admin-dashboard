@@ -11,31 +11,50 @@ import Footer from "./Footer";
 export default function MainLayout({ children }) {
   const path = usePathname();
 
-  const hideHeader = path === "/" || path === "/verify-otp";
+  const hideHeader =
+    path === "/" || path === "/verify-otp" || path === "/forgot-password";
 
   return (
     <Provider store={store}>
       {hideHeader ? (
         children
       ) : (
-        <>
+        <div className="w-full min-h-screen bg-[#111]">
+          {/* Header */}
           <Header />
 
+          {/* Layout */}
           <div
             className="
-              grid
-              lg:grid-cols-[15%_auto]
-              sm:grid-cols-[10%_auto]
-              
-            "
+                flex
+                h-[calc(100vh-80px)]
+              "
           >
-            <SideBar />
+            {/* Sidebar */}
+            <div
+              className="
+                  lg:w-[260]
+                  md:w-0
+                  w-0
+                  shrink-0
+                "
+            >
+              <SideBar />
+            </div>
 
-            <div className="min-h-screen">{children}</div>
+            {/* Main Content */}
+            <main
+              className="
+                  flex-1
+                  h-full
+                  overflow-y-auto
+                  overflow-x-hidden
+                "
+            >
+              {children}
+            </main>
           </div>
-
-          {/* <Footer /> */}
-        </>
+        </div>
       )}
     </Provider>
   );

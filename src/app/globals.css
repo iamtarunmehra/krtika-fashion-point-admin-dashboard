@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 * {
-  font-family: "Roboto Slab", serif;
+  font-family: "Poppins", serif;
 }
 
 body {
@@ -34,7 +34,7 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-linear(180deg,
+  background: linear-gradient(180deg,
       #8c670a 0%,
       #c9971a 25%,
       #e6c766 50%,
@@ -46,7 +46,7 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: linear-linear(180deg,
+  background: linear-gradient(180deg,
       #b8860b 0%,
       #f5df8b 50%,
       #b8860b 100%);

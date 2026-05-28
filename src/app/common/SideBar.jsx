@@ -62,14 +62,14 @@ export default function SideBar() {
           top-0
           left-0
           z-115
-          h-screen
+          h-[90vh]
           w-[280]
           sm:w-[300]
           lg:w-full
           bg-[#0b0b0b]
           border-r
           border-[#1f1f1f]
-          overflow-y-auto
+          overflow-y-scroll
           overflow-x-hidden
           custom-scrollbar
           duration-300
@@ -137,10 +137,11 @@ export default function SideBar() {
               >
                 <li
                   className="
+                  
                     group
                     flex
                     items-center
-                    gap-4
+                    gap-2.5
                     px-4
                     py-4
                     rounded-2xl
@@ -175,7 +176,7 @@ export default function SideBar() {
                     className="
                       text-sm
                       sm:text-base
-                      capitalize
+                      uppercase
                       whitespace-nowrap
                     "
                   >
