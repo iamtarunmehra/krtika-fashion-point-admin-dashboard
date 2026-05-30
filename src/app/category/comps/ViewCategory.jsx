@@ -47,8 +47,8 @@ export default function ViewCategory({ setLoading, fetchAllCategories, loading, 
             setLoading(true);
 
             const response = await post_api({
-                body: { category_id },
-                params: null,
+                body: {},
+                params: category_id,
                 path: "admin/category/delete-category"
             });
 
@@ -58,10 +58,16 @@ export default function ViewCategory({ setLoading, fetchAllCategories, loading, 
                 Swal.fire({
                     icon: "success",
                     title: "Deleted!",
-                    text: response.data.msg,
-                    ...swalBase
-                });
+                    text:
+                        response?.data?.msg ||
+                        "Category deleted successfully",
 
+                    timer: 1800,
+
+                    showConfirmButton: false,
+
+                    ...swalBase
+                })
                 fetchAllCategories();
 
             } else {
@@ -124,8 +130,6 @@ export default function ViewCategory({ setLoading, fetchAllCategories, loading, 
 
     return (
         <div className="">
-
-            {loading && <Loading />}
 
             <section className="w-full">
 

@@ -4,6 +4,7 @@ import { gold } from '../color/color'
 import AddCategory from './comps/AddCategory'
 import ViewCategory from './comps/ViewCategory'
 import { get_api } from '../api_helper/api_helper'
+import Loading from '../../../Loading'
 
 export default function Page() {
 
@@ -27,7 +28,7 @@ export default function Page() {
             });
 
             if (response.data.success) {
-                setCategories(response.data.data);
+                setCategories([...response.data.data]);
             }
 
         } catch (error) {
@@ -47,10 +48,14 @@ export default function Page() {
     return (
         <div className='lg:p-10 p-5 h-[90vh] bg-black text-white overflow-y-scroll custom-scrollbar scroll-smooth'>
 
+
+            {loading && <Loading />}
+
             {/* Buttons */}
             <div className='flex sm:flex-row flex-col gap-4 mb-8'>
 
-                <button
+                <span
+                    type='button'
                     onClick={() => setActiveTab('add-category')}
                     className={`
         px-6 py-3 rounded-2xl font-semibold duration-300
@@ -83,12 +88,12 @@ export default function Page() {
                     }
                 >
                     Add Category
-                </button>
+                </span>
 
-                <button
+                <span
                     onClick={() => {
-                        setActiveTab('view-category')
                         fetchAllCategories()
+                        setActiveTab('view-category')
                     }}
                     className={` relative
         px-6 py-3 rounded-2xl font-semibold duration-300
@@ -122,7 +127,7 @@ export default function Page() {
                 >
                     <p className='absolute animate-pulse -top-2 -right-2 w-6 h-6 flex items-center justify-center bg-amber-300 text-black rounded-full'>{categories?.length}</p>
                     View Category
-                </button>
+                </span>
 
             </div>
 

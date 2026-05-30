@@ -334,7 +334,7 @@ export default function AddCategory({ editId, setEditId }) {
                 <div className="mb-8">
 
                     <h1
-                    style={{color:gold.mid}}
+                        style={{ color: gold.mid }}
                         className="
                         text-3xl
                         lg:text-4xl
@@ -512,16 +512,17 @@ export default function AddCategory({ editId, setEditId }) {
                             type="submit"
                             style={{ background: `linear-gradient(to bottom right, ${gold.dark},${gold.base},${gold.dark})` }}
                             className="
-                            w-full
-                            py-3
-                            cursor-pointer
-                            hover:scale-[1.03] 
-                            rounded-xl
-                            font-semibold
-                            text-black
-                            duration-300
-                            shadow-lg
-                        "
+                                w-full
+                                mt-5
+                                p-4
+                                rounded-2xl
+                                font-semibold
+                                text-black
+                                cursor-pointer
+                                text-lg
+                                hover:scale-[1.01]
+                                duration-300
+                            "
                         >
                             {editId ? 'Update Category' : 'Add Category'}
                         </button>

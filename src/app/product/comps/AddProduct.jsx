@@ -689,7 +689,7 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                                 outline-none
                             "
                             />
-                            <button
+                            <span
                                 type="button"
                                 onClick={() =>
                                     setProductData({
@@ -728,7 +728,7 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
 
                                 {/* Content */}
                                 <span className="relative z-10 flex items-center justify-center gap-1"><MdOutlineAutoFixHigh size={20} /> Auto</span>
-                            </button>
+                            </span>
                         </div>
                     </div>
 
@@ -769,6 +769,8 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                         </label>
 
                         <select
+                        disabled={editId}
+                            required
                             name="category_id"
                             value={productData.category_id}
                             onChange={handleChange}
@@ -988,9 +990,12 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                                 w-full
                                 p-3
                                 rounded-xl
-                                bg-black
-                                border
-                                border-gray-700
+                                bg-amber-300
+                                hover:scale-[1.02]
+                                duration-300
+                                text-black
+                                cursor-pointer
+                                font-bold
                             "
                         />
 
@@ -1038,12 +1043,15 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                             accept="image/*"
                             onChange={handleGalleryImages}
                             className="
-                                w-full
+                               w-full
                                 p-3
                                 rounded-xl
-                                bg-black
-                                border
-                                border-gray-700
+                                bg-amber-300
+                                hover:scale-[1.02]
+                                duration-300
+                                text-black
+                                cursor-pointer
+                                font-bold
                             "
                         />
                     </div>
@@ -1088,7 +1096,7 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                                             "
                                         />
 
-                                        <button
+                                        <span
                                             type="button"
                                             onClick={() =>
                                                 removeGalleryImage(index)
@@ -1108,7 +1116,7 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                                             "
                                         >
                                             <FiTrash2 />
-                                        </button>
+                                        </span>
 
                                     </div>
 
@@ -1278,10 +1286,9 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                                 mt-5
                                 p-4
                                 rounded-2xl
-                                text-bold
                                 text-black
                                 cursor-pointer
-                                font-black
+                                font-semibold
                                 text-lg
                                 hover:scale-[1.01]
                                 duration-300

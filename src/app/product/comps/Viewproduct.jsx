@@ -257,8 +257,6 @@ export default function ViewProduct({ setLoading, fetchAllProducts, loading, pro
     return (
         <div className="">
 
-            {loading && <Loading />}
-
             <section className="w-full">
 
                 {/* Heading */}
@@ -449,11 +447,12 @@ export default function ViewProduct({ setLoading, fetchAllProducts, loading, pro
                                         className="
                                                 text-[#f5d36b]
                                                 mt-2
+                                                line-clamp-2
                                                 text-sm
                                                 tracking-wide
                                             "
                                     >
-                                        /{item.p_short_description}
+                                        {item.p_short_description}
                                     </p>
 
                                     {/* Buttons */}

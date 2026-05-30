@@ -82,7 +82,7 @@ export default function Page() {
             {/* Buttons */}
             <div className='flex sm:flex-row flex-col gap-4 mb-8'>
 
-                <button
+                <span
                     onClick={() => setActiveTab('add-product')}
                     className={`
         px-6 py-3 rounded-2xl font-semibold duration-300
@@ -115,9 +115,9 @@ export default function Page() {
                     }
                 >
                     Add Products
-                </button>
+                </span>
 
-                <button
+                <span
                     onClick={() => {
                         setActiveTab('view-product')
                         fetchAllProducts()
@@ -154,7 +154,7 @@ export default function Page() {
                 >
                     <p className='absolute animate-pulse -top-2 -right-2 w-6 h-6 flex items-center justify-center bg-amber-300 text-black rounded-full'>{products?.length || 0}</p>
                     View Products
-                </button>
+                </span>
 
             </div>
 
