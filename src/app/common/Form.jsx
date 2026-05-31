@@ -117,35 +117,15 @@ export default function Form() {
           >
             {/* TOP */}
             <div className="relative z-10">
-              {/* LOGO */}
-              <div
-                className="
-                                w-[70]
-                                h-[70]
-                                rounded-full
-                                flex
-                                items-center
-                                justify-center
-                                border
-                                shadow-[0_10px_40px_rgba(0,0,0,0.5)]
-                            "
-                style={{
-                  borderColor: gold.base,
-                  background: `linear-gradient(to bottom right, ${"#E6C766"}, ${"black"})`,
-                }}
-              >
-                <Crown size={34} className="text-white" />
-              </div>
-
               {/* TITLE */}
               <h1
                 className="
                                 text-5xl
                                 xl:text-6xl
-                                font-black
+                                font-extrabold
                                 leading-[1.05]
                                 mt-10
-                                uppercase
+                                capitalize
                             "
                 style={{ color: gold.base }}
               >
@@ -245,25 +225,14 @@ export default function Form() {
                         "
             >
               {/* MOBILE LOGO */}
-              <div className="lg:hidden flex justify-center mb-8">
-                <div
-                  className="
-                                    w-[75]
-                                    h-[75]
-                                    rounded-full
-                                    flex
-                                    items-center
-                                    justify-center
-                                    border
-                                "
-                  style={{
-                    borderColor: gold.base,
-                    background: `linear-gradient(to bottom right, ${"#E6C766"}, ${"black"})`,
-                  }}
-                >
-                  <Crown size={28} className="text-white" />
+              <div className="lg:hidden block">
+                <div className=" flex justify-center">
+                  <div className=" flex items-center justify-center mb-8 bg-amber-200 text-black font-bold text-xl w-16 h-16 rounded-full border-2   p-3 border-amber-200">
+                    KFP
+                  </div>
                 </div>
               </div>
+
 
               {/* HEADING */}
               <div className="text-center">

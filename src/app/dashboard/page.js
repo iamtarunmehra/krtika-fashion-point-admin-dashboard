@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 import {
     FaShoppingBag,
@@ -124,8 +125,9 @@ export default function Page() {
                         </p>
                     </div>
 
-                    <button
-                        className="
+                    <Link href={'/orders'}>
+                        <button
+                            className="
               px-6
               py-3
               rounded-2xl
@@ -141,9 +143,10 @@ export default function Page() {
               w-full
               sm:w-fit
             "
-                    >
-                        Go To Orders
-                    </button>
+                        >
+                            Go To Orders
+                        </button>
+                    </Link>
                 </div>
 
                 {/* STATS */}

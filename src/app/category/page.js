@@ -46,7 +46,7 @@ export default function Page() {
     }, []);
 
     return (
-        <div className='lg:p-10 p-5 h-[90vh] bg-black text-white overflow-y-scroll custom-scrollbar scroll-smooth'>
+        <div className='lg:p-10 p-5 h-full bg-black text-white overflow-y-scroll custom-scrollbar scroll-smooth'>
 
 
             {loading && <Loading />}

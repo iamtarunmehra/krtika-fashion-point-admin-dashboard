@@ -102,22 +102,25 @@ export default function Header() {
       {menuOpen && (
         <div onClick={() => setMenuOpen(false)} className="w-full h-full fixed top-0 left-0 bg-[rgba(0,0,0,0.9)] -z-10"></div>
       )}
-      {/* Top Header */}
-      <div
-        className="
+
+
+      {/* Pc Header */}
+      <div className="lg:block hidden">
+        <div
+          className="
       w-full
       bg-[#0a0a0a]/95
       backdrop-blur-xl
       border-b border-[#2b2b2b]
       shadow-[0_8px_30px_rgba(0,0,0,0.45)]
     "
-      >
-        <div className="max-w-[1420] mx-auto px-4 py-4 flex items-center justify-between">
-          {/* Logo */}
-          {/* for pc */}
-          <div className="lg:block hidden">
-            <h1
-              className="
+        >
+          <div className="max-w-[1420] mx-auto px-4 py-4 flex items-center justify-between">
+            {/* Logo */}
+            {/* for pc */}
+            <div className="lg:block hidden">
+              <h1
+                className="
             
           lg:text-2xl
           text-2xl
@@ -126,13 +129,13 @@ export default function Header() {
           cursor-pointer
           flex items-center gap-2
         "
-            >
-              <span className="text-white flex items-center gap-3">
-                <FaUser style={{ color: gold.mid }} size={20} /> Admin
-              </span>
+              >
+                <span className="text-white flex items-center gap-3">
+                  <FaUser style={{ color: gold.mid }} size={20} /> Admin
+                </span>
 
-              <span
-                className="
+                <span
+                  className="
             bg-linear-to-r
             from-[#f5d36b]
             via-[#d4af37]
@@ -140,18 +143,18 @@ export default function Header() {
             bg-clip-text
             text-transparent
           "
-              >
-                Dashboard
-              </span>
-            </h1>
-          </div>
+                >
+                  Dashboard
+                </span>
+              </h1>
+            </div>
 
 
-          {/* Logo */}
-          {/* for mobile and small devices */}
-          <div className="lg:hidden block">
-            <h1
-              className="
+            {/* Logo */}
+            {/* for mobile and small devices */}
+            <div className="lg:hidden block">
+              <h1
+                className="
           lg:text-2xl
           text-2xl
           font-black
@@ -159,13 +162,13 @@ export default function Header() {
           cursor-pointer
           flex items-center gap-2
         "
-            >
-              <span className="text-white flex items-center gap-3">
-                <FaUser style={{ color: gold.mid }} size={20} />
-              </span>
+              >
+                <span className="text-white flex items-center gap-3">
+                  <FaUser style={{ color: gold.mid }} size={20} />
+                </span>
 
-              <span
-                className="
+                <span
+                  className="
             bg-linear-to-r
             from-[#f5d36b]
             via-[#d4af37]
@@ -173,22 +176,22 @@ export default function Header() {
             bg-clip-text
             text-transparent
           "
-              >
-                Dashboard
-              </span>
-            </h1>
-          </div>
+                >
+                  Dashboard
+                </span>
+              </h1>
+            </div>
 
 
-          {/* Profile */}
-          <div
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex items-center gap-4 relative"
-          >
-            <div className="flex items-center gap-3 group">
-              {/* Avatar */}
-              <div
-                className="
+            {/* Profile */}
+            <div
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex items-center gap-4 relative"
+            >
+              <div className="flex items-center gap-3 group">
+                {/* Avatar */}
+                <div
+                  className="
               w-10 h-10
               rounded-full
               bg-linear-to-br
@@ -204,14 +207,14 @@ export default function Header() {
               cursor-pointer
               font-bold
             "
-              >
-                K
-              </div>
+                >
+                  K
+                </div>
 
-              {/* Name */}
-              <div className="relative">
-                <p
-                  className="
+                {/* Name */}
+                <div className="relative">
+                  <p
+                    className="
                 text-white
                 font-extrabold
                 sm:block hidden
@@ -220,20 +223,19 @@ export default function Header() {
                 hover:text-[#f5d36b]
                 duration-300
                 tracking-[3]
-                uppercase
 
               "
-                >
-                  <span>KFP</span>
-                </p>
+                  >
+                    <span>KFP</span>
+                  </p>
 
-                {/* Dropdown */}
-                <div
-                  className={`
+                  {/* Dropdown */}
+                  <div
+                    className={`
                 ${menuOpen
-                      ? "opacity-100 visible translate-y-0"
-                      : "opacity-0 invisible -translate-y-3"
-                    }
+                        ? "opacity-100 visible translate-y-0"
+                        : "opacity-0 invisible -translate-y-3"
+                      }
 
                 absolute
                 top-[65]
@@ -248,14 +250,14 @@ export default function Header() {
                 shadow-[0_15px_40px_rgba(0,0,0,0.6)]
                 duration-300
               `}
-                >
-                  <ul className="p-2 flex flex-col gap-1">
-                    {HeaderData.map((item, index) => {
-                      return (
-                        <Link key={index} href={item.slug} className="w-full">
-                          <li
-                            onClick={() => setMenuOpen(false)}
-                            className="
+                  >
+                    <ul className="p-2 flex flex-col gap-1">
+                      {HeaderData.map((item, index) => {
+                        return (
+                          <Link key={index} href={item.slug} className="w-full">
+                            <li
+                              onClick={() => setMenuOpen(false)}
+                              className="
                           px-4 py-3
                           rounded-xl
                           text-black
@@ -267,17 +269,17 @@ export default function Header() {
                           text-md
                           flex items-center gap-2
                         "
-                          >
-                            {item.icon}
-                            {item.title}
-                          </li>
-                        </Link>
-                      );
-                    })}
+                            >
+                              {item.icon}
+                              {item.title}
+                            </li>
+                          </Link>
+                        );
+                      })}
 
-                    <li
-                      onClick={logoutAdmin}
-                      className="
+                      <li
+                        onClick={logoutAdmin}
+                        className="
                     px-4 py-3
                     rounded-xl
                     text-red-600
@@ -289,17 +291,23 @@ export default function Header() {
                     font-medium
                     flex items-center gap-2
                   "
-                    >
-                      <FaUser size={18} />
-                      Logout
-                    </li>
-                  </ul>
+                      >
+                        <FaUser size={18} />
+                        Logout
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+
+
+
+
     </header>
   );
 }

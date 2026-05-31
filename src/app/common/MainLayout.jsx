@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
 import SideBar from "./SideBar";
-import Footer from "./Footer";
 
 export default function MainLayout({ children }) {
   const path = usePathname();
@@ -19,15 +18,17 @@ export default function MainLayout({ children }) {
       {hideHeader ? (
         children
       ) : (
-        <div className="w-full min-h-screen bg-[#111]">
+        <div className="w-full relative  bg-[#111]">
           {/* Header */}
           <Header />
 
           {/* Layout */}
           <div
             className="
+            lg:h-[90vh]
+            h-screen
+            overflow-y-scroll
                 flex
-                h-[calc(100vh-80px)]
               "
           >
             {/* Sidebar */}

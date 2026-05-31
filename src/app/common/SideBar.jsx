@@ -18,7 +18,7 @@ export default function SideBar() {
           lg:hidden
           fixed
           top-4
-          left-4
+          right-4
           z-120
           w-12
           h-12
@@ -31,7 +31,7 @@ export default function SideBar() {
           items-center
           justify-center
           text-2xl
-          shadow-[0_0_25px_rgba(212,175,55,0.12)]
+          shadow-lg shadow-black
           backdrop-blur-xl
         "
       >
@@ -46,7 +46,7 @@ export default function SideBar() {
           inset-0
           bg-black/70
           backdrop-blur-sm
-          z-110
+          z-150
           duration-300
           lg:hidden
 
@@ -61,8 +61,9 @@ export default function SideBar() {
           lg:sticky
           top-0
           left-0
-          z-115
-          h-[90vh]
+          z-200
+          lg:h-[90vh]
+          h-screen
           w-[280]
           sm:w-[300]
           lg:w-full
@@ -82,7 +83,7 @@ export default function SideBar() {
           className="
             flex
             items-center
-            justify-between
+            justify-between            
             px-5
             py-5
             border-b
@@ -93,6 +94,7 @@ export default function SideBar() {
           <h2
             className="
               text-xl
+              
               font-black
               tracking-[2]
               bg-linear-to-r
@@ -137,7 +139,6 @@ export default function SideBar() {
               >
                 <li
                   className="
-                  
                     group
                     flex
                     items-center
@@ -176,7 +177,7 @@ export default function SideBar() {
                     className="
                       text-sm
                       sm:text-base
-                      uppercase
+                      font-semibold
                       whitespace-nowrap
                     "
                   >

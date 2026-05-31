@@ -673,7 +673,7 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                             Product Slug
                         </label>
 
-                        <div className="flex items-center gap-3">
+                        <div className="flex md:flex-row flex-col items-center lg:gap-3 gap-5">
                             <input
                                 type="text"
                                 name="p_slug"
@@ -699,8 +699,10 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                                 }
                                 className="
                                     relative
+                                    w-full
                                     overflow-hidden
                                     flex items-center gap-2
+                                    justify-center
                                     px-6 py-3
                                     rounded-xl
                                     font-bold
@@ -769,7 +771,7 @@ export default function AddProduct({ editId, setEditId, loading, setLoading, cat
                         </label>
 
                         <select
-                        disabled={editId}
+                            disabled={editId}
                             required
                             name="category_id"
                             value={productData.category_id}
