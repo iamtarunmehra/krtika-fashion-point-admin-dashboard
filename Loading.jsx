@@ -13,7 +13,7 @@ export default function Loading() {
         {/* Loading Text */}{" "}
         <p className=" text-[#f5d36b] font-semibold text-lg tracking-[4px] uppercase drop-shadow-[0_0_10px_rgba(245,211,107,0.5)] ">
           {" "}
-          Loading...{" "}
+          Processing...{" "}
         </p>{" "}
       </div>{" "}
     </div>

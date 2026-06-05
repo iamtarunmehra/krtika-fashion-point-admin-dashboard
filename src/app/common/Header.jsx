@@ -115,7 +115,7 @@ export default function Header() {
       shadow-[0_8px_30px_rgba(0,0,0,0.45)]
     "
         >
-          <div className="max-w-[1420] mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="max-w-[1500] mx-auto px-4 py-4 flex items-center justify-between">
             {/* Logo */}
             {/* for pc */}
             <div className="lg:block hidden">
